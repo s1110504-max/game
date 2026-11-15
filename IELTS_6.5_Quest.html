@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IELTS 6.5 Quest｜雅思升級任務</title>
+<style>
+:root{--navy:#18324b;--blue:#477b9b;--sky:#eaf3f7;--cream:#fbfaf6;--ink:#243746;--muted:#687985;--gold:#e4b75d;--green:#4d927d;--line:#dce6e9}
+*{box-sizing:border-box}body{margin:0;background:var(--cream);font-family:system-ui,-apple-system,"Noto Sans TC",sans-serif;color:var(--ink)}
+header{background:linear-gradient(120deg,#18324b,#376b86);color:white;padding:30px 20px 25px}
+.wrap{max-width:1050px;margin:auto}header .top{display:flex;justify-content:space-between;gap:16px;align-items:center;flex-wrap:wrap}
+.eyebrow{letter-spacing:2px;font-size:12px;opacity:.8}h1{margin:8px 0;font-size:clamp(27px,5vw,40px)}header p{margin:6px 0;color:#e2edf2}
+.pill{border:1px solid #ffffff55;border-radius:30px;padding:8px 13px;font-size:13px}
+main{max-width:1050px;margin:22px auto;padding:0 16px 45px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:-2px}
+.stat,.panel,.mission{background:white;border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 5px 18px #18324b08}
+.stat small{color:var(--muted)}.stat strong{display:block;font-size:25px;color:var(--navy);margin-top:4px}
+.progressbox{margin:18px 0 22px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px}
+.progress-head{display:flex;justify-content:space-between;gap:10px;font-weight:650}.bar{height:11px;background:#e9eff1;border-radius:20px;overflow:hidden;margin-top:11px}.fill{height:100%;width:0;background:linear-gradient(90deg,#5e9c91,#e4b75d);transition:.35s}
+.section-title{display:flex;justify-content:space-between;align-items:end;gap:12px;margin:25px 0 12px}.section-title h2{margin:0;font-size:21px;color:var(--navy)}.section-title span{font-size:13px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:13px}
+.mission{cursor:pointer;transition:.2s;position:relative}.mission:hover{transform:translateY(-2px);border-color:#9abac8}.mission .icon{font-size:25px}.mission h3{margin:7px 0 4px;color:var(--navy)}.mission p{margin:0;color:var(--muted);font-size:14px;line-height:1.5}.tag{display:inline-block;margin-top:11px;background:var(--sky);color:#35647b;padding:4px 9px;border-radius:20px;font-size:12px}
+button{border:0;border-radius:10px;background:var(--navy);color:white;padding:11px 15px;font-weight:650;cursor:pointer;font-size:14px}button:hover{background:#315b75}button.secondary{background:#eaf1f4;color:var(--navy)}button:disabled{opacity:.45;cursor:not-allowed}
+.panel{margin-top:15px;display:none}.panel.active{display:block}.panel h2{margin:0 0 8px;color:var(--navy)}.muted{color:var(--muted);font-size:14px;line-height:1.6}
+.question{padding:13px;background:#f5f8f8;border-radius:12px;margin:12px 0}.question label{display:block;margin:8px 0;font-size:14px}
+input[type=text],textarea,select{width:100%;padding:11px;border:1px solid #cbd9de;border-radius:9px;font:inherit;background:white;color:var(--ink)}
+textarea{min-height:145px;resize:vertical}.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:13px}.feedback{margin-top:12px;padding:12px;border-radius:10px;background:#eef6f2;display:none;line-height:1.55}.feedback.show{display:block}.wordcount{font-size:13px;color:var(--muted);text-align:right;margin-top:5px}
+.vocab{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.word{border:1px solid var(--line);border-radius:12px;padding:12px}.word b{color:var(--navy)}.word small{display:block;color:var(--muted);margin-top:4px}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:24px}
+@media(max-width:650px){.stats{grid-template-columns:repeat(2,1fr)}.grid,.vocab{grid-template-columns:1fr}.section-title{align-items:start;flex-direction:column}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+ <div class="top"><div><div class="eyebrow">YOUR PERSONAL IELTS ADVENTURE</div><h1>IELTS 6.5 Quest</h1><p>從 Band 5.5 出發，完成每日任務，逐步解鎖 6.5。</p></div><div class="pill">🎓 大學生英文升級計畫</div></div>
+</div></header>
+<main>
+ <section class="stats">
+  <div class="stat"><small>目前等級</small><strong id="level">Band 5.5</strong></div>
+  <div class="stat"><small>累積經驗值 XP</small><strong id="xp">0</strong></div>
+  <div class="stat"><small>完成任務</small><strong id="done">0 / 8</strong></div>
+  <div class="stat"><small>連續學習</small><strong id="streak">0 天</strong></div>
+ </section>
+ <section class="progressbox"><div class="progress-head"><span>🏁 前往 Band 6.5</span><span id="progressText">0 / 800 XP</span></div><div class="bar"><div class="fill" id="progress"></div></div><p class="muted" style="margin:9px 0 0">每完成一項練習即可獲得 XP。重點不是一次衝高分，而是穩定累積四科能力。</p></section>
+ <div class="section-title"><h2>今日任務地圖</h2><span>點選任務開始挑戰</span></div>
+ <div class="grid">
+  <article class="mission" onclick="openTask('reading')"><div class="icon">📖</div><h3>Reading｜閱讀偵探</h3><p>練習快速定位、同義替換與細節理解。</p><span class="tag">約 8 分鐘・+100 XP</span></article>
+  <article class="mission" onclick="openTask('listening')"><div class="icon">🎧</div><h3>Listening｜聽力捕手</h3><p>練習抓關鍵資訊、數字與語意線索。</p><span class="tag">約 5 分鐘・+100 XP</span></article>
+  <article class="mission" onclick="openTask('writing')"><div class="icon">✍️</div><h3>Writing｜寫作工坊</h3><p>練習 Task 2 段落架構、論點與例子。</p><span class="tag">約 15 分鐘・+150 XP</span></article>
+  <article class="mission" onclick="openTask('speaking')"><div class="icon">🗣️</div><h3>Speaking｜口說挑戰</h3><p>用自然英文回答問題，建立流暢度與延伸能力。</p><span class="tag">約 5 分鐘・+150 XP</span></article>
+  <article class="mission" onclick="openTask('vocab')"><div class="icon">🧠</div><h3>Vocabulary｜字彙補給站</h3><p>學會能用在大學、教育與日常話題的字彙。</p><span class="tag">約 5 分鐘・+80 XP</span></article>
+  <article class="mission" onclick="openTask('grammar')"><div class="icon">🧩</div><h3>Grammar｜文法修復站</h3><p>修正常見錯誤，讓句子更準確、清楚。</p><span class="tag">約 5 分鐘・+80 XP</span></article>
+  <article class="mission" onclick="openTask('strategy')"><div class="icon">🧭</div><h3>Strategy｜考試策略室</h3><p>建立時間分配與答題檢查習慣。</p><span class="tag">約 3 分鐘・+70 XP</span></article>
+  <article class="mission" onclick="openTask('reflection')"><div class="icon">🌱</div><h3>Reflection｜今日回顧</h3><p>記錄今天學到什麼，以及下一步要改善的地方。</p><span class="tag">約 3 分鐘・+70 XP</span></article>
+ </div>
+
+ <section class="panel" id="reading"><h2>📖 Reading｜閱讀偵探</h2><p class="muted">閱讀短文，再選出最符合文章內容的答案。考點：同義替換與主旨理解。</p>
+ <div class="question"><b>Passage</b><p>Many universities are introducing peer-mentoring programmes to help first-year students adapt to campus life. Instead of relying only on formal lectures, new students can talk to experienced students about study routines, social activities and academic challenges. Research suggests that these informal conversations may increase students' sense of belonging. However, the success of such programmes depends on regular training and clear expectations for mentors.</p></div>
+ <div class="question"><b>1. What is the main purpose of peer-mentoring programmes?</b><label><input type="radio" name="r1" value="a"> A. To replace university lectures.</label><label><input type="radio" name="r1" value="b"> B. To support new students in adjusting to university.</label><label><input type="radio" name="r1" value="c"> C. To reduce the number of university courses.</label></div>
+ <div class="question"><b>2. What may improve students' sense of belonging?</b><label><input type="radio" name="r2" value="a"> A. Informal conversations with experienced students.</label><label><input type="radio" name="r2" value="b"> B. More examinations.</label><label><input type="radio" name="r2" value="c"> C. Fewer social activities.</label></div>
+ <button onclick="checkQuiz('reading',['b','a'],100,'readFeedback')">提交答案</button><div class="feedback" id="readFeedback"></div></section>
+
+ <section class="panel" id="listening"><h2>🎧 Listening｜聽力捕手</h2><p class="muted">這是文字版聽力策略練習：先按「播放語音」聽句子，再回答問題。若裝置支援語音合成，會以英文朗讀。</p>
+ <div class="question"><p id="listenSentence">The workshop will take place in Room 204 on Thursday afternoon, and students should register before Monday.</p><button class="secondary" onclick="speakText()">🔊 播放語音</button></div>
+ <div class="question"><b>1. Where will the workshop take place?</b><label><input type="radio" name="l1" value="a"> Room 204</label><label><input type="radio" name="l1" value="b"> Room 214</label><label><input type="radio" name="l1" value="c"> Room 240</label></div>
+ <div class="question"><b>2. When should students register?</b><label><input type="radio" name="l2" value="a"> Before Thursday</label><label><input type="radio" name="l2" value="b"> Before Monday</label><label><input type="radio" name="l2" value="c"> On Friday</label></div>
+ <button onclick="checkQuiz('listening',['a','b'],100,'listenFeedback')">提交答案</button><div class="feedback" id="listenFeedback"></div></section>
+
+ <section class="panel" id="writing"><h2>✍️ Writing｜寫作工坊</h2><p class="muted">IELTS Writing Task 2 練習。目標：先寫出清楚立場，再用理由與例子支持。正式 Task 2 建議至少 250 字。</p>
+ <div class="question"><b>題目</b><p>Some people believe that university students should be required to do volunteer work in their communities. To what extent do you agree or disagree?</p></div>
+ <textarea id="essay" placeholder="In my opinion, ..."></textarea><div class="wordcount" id="wordCount">0 words</div>
+ <div class="question"><b>寫作自我檢查</b><label><input type="checkbox"> 我在引言段清楚表達立場。</label><label><input type="checkbox"> 每個主體段都有一個明確主題句。</label><label><input type="checkbox"> 我有解釋理由，而不只是列出觀點。</label><label><input type="checkbox"> 我有使用具體例子支持論點。</label><label><input type="checkbox"> 我檢查了時態、單複數與主詞動詞一致。</label></div>
+ <button onclick="completeTask('writing',150,'writeFeedback')">完成寫作任務</button><div class="feedback" id="writeFeedback">已完成寫作練習！請保留文章，之後可再次修改。自我檢查能幫助你建立穩定的寫作流程；本工具不會自動評定正式 IELTS Band 分數。</div></section>
+
+ <section class="panel" id="speaking"><h2>🗣️ Speaking｜口說挑戰</h2><p class="muted">Part 1 + Part 2 延伸練習。建議先口頭回答，再用錄音功能回聽（可使用手機或電腦內建錄音工具）。</p>
+ <div class="question"><b>Part 1</b><p>What do you enjoy most about being a university student?</p><p>Do you prefer studying alone or with other people? Why?</p></div>
+ <div class="question"><b>Part 2｜Cue Card</b><p>Describe a skill you would like to improve.</p><p>You should say:</p><ul><li>what the skill is</li><li>why you want to improve it</li><li>how you plan to practise it</li><li>and explain how this skill may help you in the future</li></ul></div>
+ <textarea id="speakingNotes" placeholder="寫下你說話時使用的關鍵字或句型，不需要逐字稿……"></textarea>
+ <div class="question"><b>口說自我評估（每項 1–5 分）</b><div id="speakRatings"></div></div>
+ <button onclick="completeTask('speaking',150,'speakFeedback')">完成口說任務</button><div class="feedback" id="speakFeedback">完成得很好！回聽時特別注意：是否有直接回答問題、是否能延伸理由與例子，以及文法錯誤是否影響理解。</div></section>
+
+ <section class="panel" id="vocab"><h2>🧠 Vocabulary｜字彙補給站</h2><p class="muted">不要只背中文意思，試著把單字放進自己的句子。</p><div class="vocab">
+ <div class="word"><b>adapt to</b><small>適應｜Students need time to adapt to university life.</small></div><div class="word"><b>significant</b><small>顯著的、重要的｜There has been a significant improvement.</small></div>
+ <div class="word"><b>participate in</b><small>參與｜Students should participate in group activities.</small></div><div class="word"><b>beneficial</b><small>有益的｜Volunteering can be beneficial to young people.</small></div>
+ <div class="word"><b>approach</b><small>方法、途徑｜Teachers may use different approaches.</small></div><div class="word"><b>increasingly</b><small>日益地｜Technology is increasingly used in education.</small></div></div>
+ <div class="question"><b>小測驗：選出最適合的字</b><p>Group discussions can be ______ to students because they encourage the exchange of ideas.</p><label><input type="radio" name="v1" value="a"> beneficial</label><label><input type="radio" name="v1" value="b"> significant</label><label><input type="radio" name="v1" value="c"> increasingly</label></div>
+ <button onclick="checkQuiz('vocab',['a'],80,'vocabFeedback')">提交答案</button><div class="feedback" id="vocabFeedback"></div></section>
+
+ <section class="panel" id="grammar"><h2>🧩 Grammar｜文法修復站</h2><p class="muted">找出句子中的文法錯誤，建立 Band 6.5 需要的準確度。</p>
+ <div class="question"><b>Which sentence is grammatically correct?</b><label><input type="radio" name="g1" value="a"> Students has many opportunities to learn.</label><label><input type="radio" name="g1" value="b"> Students have many opportunities to learn.</label><label><input type="radio" name="g1" value="c"> Students having many opportunities to learn.</label></div>
+ <div class="question"><b>Choose the correct form:</b><p>If universities ______ more support, students might feel less stressed.</p><label><input type="radio" name="g2" value="a"> provide</label><label><input type="radio" name="g2" value="b"> provided</label><label><input type="radio" name="g2" value="c"> providing</label></div>
+ <button onclick="checkQuiz('grammar',['b','b'],80,'grammarFeedback')">提交答案</button><div class="feedback" id="grammarFeedback"></div></section>
+
+ <section class="panel" id="strategy"><h2>🧭 Strategy｜考試策略室</h2><p class="muted">Band 6.5 不只靠單字難度，也需要穩定的答題策略。</p>
+ <div class="question"><b>閱讀測驗遇到不熟悉的單字，最適合先怎麼做？</b><label><input type="radio" name="st1" value="a"> 停下來查每一個單字。</label><label><input type="radio" name="st1" value="b"> 先看上下文、詞性與句子關係，推測大意。</label><label><input type="radio" name="st1" value="c"> 直接跳過整個段落。</label></div>
+ <div class="question"><b>寫作時間有限時，最重要的做法是？</b><label><input type="radio" name="st2" value="a"> 使用越多冷僻單字越好。</label><label><input type="radio" name="st2" value="b"> 先規劃立場與段落，再留時間檢查。</label><label><input type="radio" name="st2" value="c"> 只寫引言段。</label></div>
+ <button onclick="checkQuiz('strategy',['b','b'],70,'strategyFeedback')">提交答案</button><div class="feedback" id="strategyFeedback"></div></section>
+
+ <section class="panel" id="reflection"><h2>🌱 Reflection｜今日回顧</h2><p class="muted">用 1 分鐘整理學習成果。具體的下一步，比「我要更努力」更有用。</p>
+ <div class="question"><label>今天最有收穫的是？<input id="reflect1" type="text" placeholder="例如：學會用例子延伸口說答案"></label><label style="margin-top:12px">下次想改善哪一項？<input id="reflect2" type="text" placeholder="例如：說話時的時態一致"></label></div>
+ <button onclick="completeTask('reflection',70,'reflectionFeedback')">儲存今日回顧</button><div class="feedback" id="reflectionFeedback">回顧完成！明天開始前，先花 2 分鐘看一眼今天寫下的改善目標。</div></section>
+
+ <div class="section-title"><h2>📅 建議每週訓練節奏</h2><span>可依課業與生活彈性調整</span></div>
+ <section class="panel active" style="display:block"><div class="grid">
+ <div><b>週一／週四</b><p class="muted">Listening 15 分鐘＋Speaking 15 分鐘</p></div><div><b>週二／週五</b><p class="muted">Reading 20 分鐘＋Vocabulary 10 分鐘</p></div><div><b>週三</b><p class="muted">Writing Task 2：規劃、寫作、檢查</p></div><div><b>週末</b><p class="muted">完成一回合計時練習，整理錯題與進步。</p></div></div></section>
+</main>
+<footer>IELTS 6.5 Quest · 學習輔助工具｜XP 是遊戲化鼓勵，不等同於正式 IELTS 分數。</footer>
+<script>
+const tasks={reading:100,listening:100,writing:150,speaking:150,vocab:80,grammar:80,strategy:70,reflection:70};
+let xp=0,completed=new Set(),streak=0;
+function update(){document.getElementById('xp').textContent=xp;document.getElementById('done').textContent=completed.size+' / 8';document.getElementById('progressText').textContent=Math.min(xp,800)+' / 800 XP';document.getElementById('progress').style.width=Math.min(100,xp/800*100)+'%';document.getElementById('level').textContent=xp>=800?'Band 6.5 Quest 完成':xp>=500?'Band 6.0 進階中':'Band 5.5 → 6.5';document.getElementById('streak').textContent=streak+' 天'}
+function openTask(id){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.getElementById(id).classList.add('active');document.getElementById(id).scrollIntoView({behavior:'smooth',block:'start'})}
+function award(id,points){if(!completed.has(id)){completed.add(id);xp+=points;streak=completed.size;update()} }
+function completeTask(id,points,feedback){award(id,points);document.getElementById(feedback).classList.add('show')}
+function checkQuiz(id,answers,points,feedbackId){let score=0;answers.forEach((a,i)=>{let chosen=document.querySelector('input[name="'+({reading:'r',listening:'l',vocab:'v',grammar:'g',strategy:'st'}[id])+(i+1)+'"]:checked');if(chosen&&chosen.value===a)score++});let el=document.getElementById(feedbackId);el.innerHTML='答對 '+score+' / '+answers.length+' 題。'+(score===answers.length?'太好了，全部正確！': '再看一次題目與文章線索，找出正確答案。');el.classList.add('show');if(score===answers.length)award(id,points)}
+function speakText(){let text=document.getElementById('listenSentence').textContent;if('speechSynthesis' in window){let u=new SpeechSynthesisUtterance(text);u.lang='en-US';u.rate=.85;speechSynthesis.cancel();speechSynthesis.speak(u)}else alert('此瀏覽器不支援語音合成，請閱讀句子練習。')}
+document.getElementById('essay').addEventListener('input',e=>{let words=e.target.value.trim()?e.target.value.trim().split(/\s+/).length:0;document.getElementById('wordCount').textContent=words+' words'});
+document.getElementById('speakRatings').innerHTML=['流暢度與連貫性','字彙多樣性','文法準確度','發音清晰度'].map((x,i)=>'<label>'+x+' <select><option value="">選擇</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></label>').join('');
+</script>
+</body></html>
